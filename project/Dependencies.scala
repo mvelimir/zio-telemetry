@@ -52,6 +52,9 @@ object Dependencies {
     "com.github.pureconfig"        %% "pureconfig"                    % "0.16.0",
     "com.softwaremill.sttp.client" %% "async-http-client-backend-zio" % Versions.sttp,
     "com.softwaremill.sttp.client" %% "circe"                         % Versions.sttp,
+    "dev.zio"                      %% "zio-config"                    % "1.0.6",
+    "dev.zio"                      %% "zio-config-magnolia"           % "1.0.6",
+    "dev.zio"                      %% "zio-config-typesafe"           % "1.0.6",
     "dev.zio"                      %% "zio-interop-cats"              % Versions.zioInteropCats
   )
 
