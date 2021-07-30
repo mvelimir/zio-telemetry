@@ -7,7 +7,7 @@ import sttp.model.Uri
 import sttp.model.Method.GET
 import zio.clock.Clock
 import zio.telemetry.opentracing.OpenTracing
-import zio.{ UIO, ZIO, ZLayer }
+import zio.{ UIO, ZLayer }
 import zhttp.http.HttpApp
 import zhttp.http._
 import zio.json._
