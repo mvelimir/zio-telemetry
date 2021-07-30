@@ -1,7 +1,6 @@
 package zio.telemetry.opentracing.example
 
 import zio.{ ExitCode, ZEnv, ZIO, App }
-import zio.clock.Clock
 import zio.console.putStrLn
 import sttp.model.Uri
 import zio.magic._
@@ -19,8 +18,7 @@ object ProxyServer extends App {
   private val configLayer = TypesafeConfig.fromDefaultLoader(descriptor[AppConfig])
 
   override def run(args: List[String]): ZIO[ZEnv, Nothing, ExitCode] = {
-    val exit =
-      ZIO.runtime[Clock].flatMap { implicit runtime =>
+    val exit = {
         getConfig[AppConfig].flatMap { conf =>
           val service = makeService(conf.tracer.host, "zio-proxy")
           for {
