@@ -10,12 +10,12 @@ import zio.interop.catz._
 import zio.telemetry.opentelemetry.Tracing
 import zio.telemetry.opentelemetry.example.config.AppConfig
 import zio.telemetry.opentelemetry.example.http.{ AppEnv, AppTask, Client, StatusesService }
-import zio.{ ExitCode, Managed, ZIO, ZLayer }
+import zio.{ ExitCode, Managed, ZIO, ZLayer, App }
 import org.http4s.syntax.kleisli._
 import sttp.client.asynchttpclient.zio.AsyncHttpClientZioBackend
 import sttp.model.Uri
 
-object ProxyServer extends zio.App {
+object ProxyServer extends App {
   implicit val sttpUriDescriptor: zio.config.magnolia.Descriptor[Uri] =
     zio.config.magnolia.Descriptor[String].transformOrFailLeft(str =>
       Uri.parse(str))(_.toString)

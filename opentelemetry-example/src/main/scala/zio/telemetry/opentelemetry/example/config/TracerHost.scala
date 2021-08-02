@@ -1,3 +1,3 @@
 package zio.telemetry.opentelemetry.example.config
 
-case class TracerHost(host: String) extends AnyVal
+final case class TracerHost(host: String) extends AnyVal

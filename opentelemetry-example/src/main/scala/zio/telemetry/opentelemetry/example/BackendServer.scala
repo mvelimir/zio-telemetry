@@ -1,6 +1,6 @@
 package zio.telemetry.opentelemetry.example
 
-import org.http4s.server.{Router, defaults}
+import org.http4s.server.{ Router, defaults }
 import org.http4s.server.blaze.BlazeServerBuilder
 import zio.clock.Clock
 import zio.config.getConfig
@@ -9,13 +9,13 @@ import zio.config.magnolia.DeriveConfigDescriptor.descriptor
 import zio.interop.catz._
 import zio.telemetry.opentelemetry.Tracing
 import zio.telemetry.opentelemetry.example.config.AppConfig
-import zio.telemetry.opentelemetry.example.http.{AppEnv, AppTask, Client, StatusService}
-import zio.{ExitCode, Managed, ZIO, ZLayer}
+import zio.telemetry.opentelemetry.example.http.{ AppEnv, AppTask, Client, StatusService }
+import zio.{ ExitCode, Managed, ZIO, ZLayer, App }
 import org.http4s.syntax.kleisli._
 import sttp.client.asynchttpclient.zio.AsyncHttpClientZioBackend
 import sttp.model.Uri
 
-object BackendServer extends zio.App {
+object BackendServer extends App {
   implicit val sttpUriDescriptor: zio.config.magnolia.Descriptor[Uri] =
     zio.config.magnolia.Descriptor[String].transformOrFailLeft(str =>
       Uri.parse(str))(_.toString)
