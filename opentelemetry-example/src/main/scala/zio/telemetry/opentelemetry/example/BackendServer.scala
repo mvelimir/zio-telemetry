@@ -5,7 +5,7 @@ import org.http4s.server.blaze.BlazeServerBuilder
 import zio.clock.Clock
 import zio.config.getConfig
 import zio.config.typesafe.TypesafeConfig
-import zio.config.magnolia.DeriveConfigDescriptor.descriptor
+import zio.config.magnolia.{ descriptor, Descriptor }
 import zio.interop.catz._
 import zio.telemetry.opentelemetry.Tracing
 import zio.telemetry.opentelemetry.example.config.AppConfig
@@ -16,9 +16,8 @@ import sttp.client.asynchttpclient.zio.AsyncHttpClientZioBackend
 import sttp.model.Uri
 
 object BackendServer extends App {
-  implicit val sttpUriDescriptor: zio.config.magnolia.Descriptor[Uri] =
-    zio.config.magnolia.Descriptor[String].transformOrFailLeft(str =>
-      Uri.parse(str))(_.toString)
+  implicit val sttpUriDescriptor: Descriptor[Uri] =
+    Descriptor[String].transformOrFailLeft(Uri.parse)(_.toString)
 
   val router = Router[AppTask]("/" -> StatusService.routes).orNotFound
 
