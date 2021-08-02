@@ -54,7 +54,6 @@ object Dependencies {
     "io.jaegertracing"               % "jaeger-core"                   % Versions.jaeger,
     "io.jaegertracing"               % "jaeger-client"                 % Versions.jaeger,
     "io.jaegertracing"               % "jaeger-zipkin"                 % Versions.jaeger,
-    "com.github.pureconfig"         %% "pureconfig"                    % "0.16.0",
     "com.softwaremill.sttp.client3" %% "async-http-client-backend-zio" % Versions.sttp3,
     "com.softwaremill.sttp.client3" %% "zio-json"                      % Versions.sttp3,
     "com.softwaremill.sttp.client"  %% "async-http-client-backend-zio" % Versions.sttp,
