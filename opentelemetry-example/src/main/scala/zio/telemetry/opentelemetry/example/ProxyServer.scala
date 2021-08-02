@@ -8,7 +8,7 @@ import zio.config.typesafe.TypesafeConfig
 import zio.config.magnolia.DeriveConfigDescriptor.descriptor
 import zio.interop.catz._
 import zio.telemetry.opentelemetry.Tracing
-import zio.telemetry.opentelemetry.example.config._
+import zio.telemetry.opentelemetry.example.config.AppConfig
 import zio.telemetry.opentelemetry.example.http.{ AppEnv, AppTask, Client, StatusesService }
 import zio.{ ExitCode, Managed, ZIO, ZLayer }
 import org.http4s.syntax.kleisli._
