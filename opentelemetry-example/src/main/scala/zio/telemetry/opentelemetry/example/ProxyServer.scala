@@ -8,7 +8,7 @@ import zio.config.magnolia.{ descriptor, Descriptor }
 import zio.telemetry.opentelemetry.Tracing
 import zio.telemetry.opentelemetry.example.config.AppConfig
 import zio.telemetry.opentelemetry.example.http.{ Client, StatusesService }
-import zio.{ ExitCode, Managed, ZIO, ZLayer, App }
+import zio.{ Managed, ZIO, ZLayer, App }
 import sttp.client3.asynchttpclient.zio.AsyncHttpClientZioBackend
 import sttp.model.Uri
 import zhttp.service.{ EventLoopGroup, Server }
@@ -34,5 +34,5 @@ object ProxyServer extends App {
   override def run(args: List[String]) =
     server.provideCustomLayer(envLayer
       ++ ServerChannelFactory.auto
-      ++ EventLoopGroup.auto(0)).fold(_ => ExitCode.failure, _ => ExitCode.success)
+      ++ EventLoopGroup.auto(0)).exitCode
 }
