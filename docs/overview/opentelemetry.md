@@ -3,7 +3,8 @@ id: overview_opentelemetry
 title: "OpenTelemetry"
 ---
 
-OpenTelemetry is a collection of tools, APIs, and SDKs. You can use it to instrument, generate, collect, and export telemetry data (metrics, logs, and traces) for analysis in order to understand your software's performance and behavior.
+OpenTelemetry is a collection of tools, APIs, and SDKs. You can use it to instrument, generate, collect, and export telemetry data for analysis in order to understand your software's performance and behavior. Well known implementations are [Jaeger](https://www.jaegertracing.io)
+and [Zipkin](https://www.zipkin.io).
 
 ## Installation
 
@@ -14,12 +15,13 @@ First, add the following dependency to your build.sbt:
 
 ## Usage
 
-To use ZIO Telemetry, you will need a `Tracing` service in your environment:
+To use ZIO Telemetry, you will need a `Clock` and a `Tracing` service in your environment. You also need to provide a `tracer` implementation:
 
 ```scala
 import io.opentelemetry.api.trace.{ SpanKind, StatusCode }
 import zio._
 import zio.console.getStrLn
+import zio.clock.Clock
 import zio.telemetry.opentelemetry.Tracing
 import zio.telemetry.opentelemetry.Tracing.root
 
@@ -36,7 +38,7 @@ val app =
       message <- getStrLn
       _       <- Tracing.addEvent("bar")
     } yield message
-  }.provideLayer(Tracing.live)
+  }.provideLayer(tracer ++ Clock.live >>> Tracing.live)
 ```
 
 After importing `import zio.telemetry.opentelemetry._`, additional combinators
